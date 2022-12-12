@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import InputText from "../component/InputText";
 import { Label, Row } from "../style";
 
+enum Occupation {
+  Student = "student",
+  Professor = "professor",
+}
+
 function NoHookForm() {
-  const [name, setName] = useState(""); // 10글자 이하
+  const [occupation, setOccupation] = useState(Occupation.Professor);
+  const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
   const [phone, setPhone] = useState("");
@@ -47,6 +53,10 @@ function NoHookForm() {
     setEmail(event.currentTarget.value);
   };
 
+  const handleOccupation = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOccupation(event.currentTarget.value as Occupation);
+  };
+
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (name.length > 10) {
@@ -67,20 +77,40 @@ function NoHookForm() {
         },
       }));
     }
-    // ...등..
+    // ...등.. 에러 처리 이후 로직 필요.
   };
 
   return (
     <form>
       <Row>
+        <Label>Occupation: </Label>
+        <input
+          type="radio"
+          name="occupation"
+          value="professor"
+          defaultChecked
+          onChange={handleOccupation}
+        />
+        <input
+          type="radio"
+          name="occupation"
+          value="student"
+          onChange={handleOccupation}
+        />
+      </Row>
+      <Row>
         <Label>name: </Label>
         <InputText value={name} onChange={handleName} />
-        {errors.name.invalid && <p className="error">{errors.name.message}</p>}
+        {errors.name.invalid ? (
+          <p className="error">{errors.name.message}</p>
+        ) : null}
       </Row>
       <Row>
         <Label>id: </Label>
         <input type="text" value={id} onChange={handleId} />
-        {errors.id.invalid && <p className="error">{errors.id.message}</p>}
+        {errors.id.invalid ? (
+          <p className="error">{errors.id.message}</p>
+        ) : null}
       </Row>
       <Row>
         <Label>pwd: </Label>
@@ -90,10 +120,12 @@ function NoHookForm() {
         <Label>phone: </Label>
         <input type="text" value={phone} onChange={handlePhone} />
       </Row>
-      <Row>
-        <Label>e-mail: </Label>
-        <input type="text" value={email} onChange={handleEmail} />
-      </Row>
+      {occupation === Occupation.Professor ? (
+        <Row>
+          <Label>e-mail: </Label>
+          <input type="text" value={email} onChange={handleEmail} />
+        </Row>
+      ) : null}
       <button onClick={handleSubmit}>Submit</button>
     </form>
   );
