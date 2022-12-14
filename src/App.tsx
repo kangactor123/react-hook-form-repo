@@ -1,8 +1,9 @@
+import ReactHookForm from "page/ReactHookForm";
 import React from "react";
 import NoHookForm from "./page/NoHookForm";
 
 function App() {
-  return <NoHookForm />;
+  return <ReactHookForm />;
 }
 
 export default App;
