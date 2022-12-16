@@ -1,5 +1,5 @@
 import ControlInputText from "component/ControlInputText";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Row, Label } from "style";
 
 interface TForm {
@@ -15,11 +15,11 @@ function ReactHookForm() {
   const {
     register,
     control,
-    handleSubmit,
+    handleSubmit: onSubmit,
     watch,
     formState: { errors },
   } = useForm<TForm>({
-    mode: "onChange",
+    mode: "onSubmit",
     defaultValues: {
       occupation: "student",
       id: "",
@@ -30,9 +30,12 @@ function ReactHookForm() {
     },
   });
 
-  console.log(errors);
+  const handleSubmit = (data: TForm) => {
+    // console.log(data);
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmit(handleSubmit)}>
       <Row>
         <Label>Occupation: </Label>&nbsp;
         <label>student</label>
@@ -50,9 +53,7 @@ function ReactHookForm() {
             maxLength: { value: 10, message: "최대 10글자 입력이 가능합니다." },
           }}
         />
-        {errors.name?.message ? (
-          <p className="error">{errors.name?.message}</p>
-        ) : null}
+        {errors.name ? <p className="error">{errors.name?.message}</p> : null}
       </Row>
       <Row>
         <Label>id: </Label>
@@ -82,6 +83,9 @@ function ReactHookForm() {
             },
           })}
         />
+        {errors?.email ? (
+          <p className="error">{errors.email?.message}</p>
+        ) : null}
       </Row>
       {watch("occupation") === "professor" ? (
         <Row>
@@ -89,7 +93,7 @@ function ReactHookForm() {
           <ControlInputText<TForm> control={control} name="phone" />
         </Row>
       ) : null}
-      {/* <button onClick={handleSubmit}>Submit</button> */}
+      <button>Submit</button>
     </form>
   );
 }
