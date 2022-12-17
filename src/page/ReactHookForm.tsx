@@ -1,4 +1,5 @@
 import ControlInputText from "component/ControlInputText";
+import MInputText from "component/mui/MInputText";
 import MRadio, { TRadioGroup } from "component/mui/MRadio";
 import MSelect, { ISelectItem } from "component/mui/MSelect";
 import { useForm } from "react-hook-form";
@@ -59,7 +60,7 @@ function ReactHookForm() {
       </Row>
       <Row>
         <Label>name: </Label>
-        <ControlInputText<TForm>
+        <MInputText<TForm>
           control={control}
           name="name"
           rules={{
