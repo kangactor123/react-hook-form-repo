@@ -1,4 +1,5 @@
 import ControlInputText from "component/ControlInputText";
+import MRadio, { TRadioGroup } from "component/mui/MRadio";
 import MSelect, { ISelectItem } from "component/mui/MSelect";
 import { useForm } from "react-hook-form";
 import { Row, Label } from "style";
@@ -41,6 +42,11 @@ function ReactHookForm() {
     { label: "grandmother", value: "grandmother" },
   ];
 
+  const radioGroup: TRadioGroup[] = [
+    { label: "professor", value: "professor" },
+    { label: "student", value: "student" },
+  ];
+
   const handleSubmit = (data: TForm) => {
     // console.log(data);
   };
@@ -49,10 +55,7 @@ function ReactHookForm() {
     <form onSubmit={onSubmit(handleSubmit)}>
       <Row>
         <Label>Occupation: </Label>&nbsp;
-        <label>student</label>
-        <input type="radio" value="student" {...register("occupation")} />
-        <label>professor</label>
-        <input type="radio" value="professor" {...register("occupation")} />
+        <MRadio group={radioGroup} name="occupation" control={control} />
       </Row>
       <Row>
         <Label>name: </Label>
