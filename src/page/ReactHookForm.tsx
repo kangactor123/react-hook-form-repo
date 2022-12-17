@@ -1,4 +1,5 @@
 import ControlInputText from "component/ControlInputText";
+import MSelect, { ISelectItem } from "component/mui/MSelect";
 import { useForm } from "react-hook-form";
 import { Row, Label } from "style";
 
@@ -9,6 +10,7 @@ interface TForm {
   pwd: string;
   email: string;
   phone: string;
+  identity: string;
 }
 
 function ReactHookForm() {
@@ -27,8 +29,17 @@ function ReactHookForm() {
       pwd: "",
       email: "",
       phone: "",
+      identity: "child",
     },
   });
+
+  const selectList: ISelectItem[] = [
+    { label: "child", value: "child" },
+    { label: "father", value: "father" },
+    { label: "mother", value: "mother" },
+    { label: "grandfather", value: "mather", disabled: true },
+    { label: "grandmother", value: "grandmother" },
+  ];
 
   const handleSubmit = (data: TForm) => {
     // console.log(data);
@@ -93,6 +104,15 @@ function ReactHookForm() {
           <ControlInputText<TForm> control={control} name="phone" />
         </Row>
       ) : null}
+      <Row>
+        <Label>identity: </Label>
+        <MSelect
+          control={control}
+          name="identity"
+          selectList={selectList}
+          placeholder={"선택해주세요"}
+        />
+      </Row>
       <button>Submit</button>
     </form>
   );
