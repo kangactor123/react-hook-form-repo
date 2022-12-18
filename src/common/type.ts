@@ -13,3 +13,13 @@ export type TControl<T extends FieldValues> = {
     "valueAsNumber" | "valueAsDate" | "setValueAs" | "disabled"
   >;
 };
+
+export interface TForm {
+  occupation: string;
+  id: string;
+  name: string;
+  pwd: string;
+  email: string;
+  phone: string;
+  identity: string;
+}

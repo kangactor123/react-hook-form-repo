@@ -1,9 +1,20 @@
-import ReactHookForm from "page/ReactHookForm";
 import React from "react";
+import EditForm from "page/EditForm";
+import ReactHookForm from "page/ReactHookForm";
 import NoHookForm from "./page/NoHookForm";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "page/Home";
 
 function App() {
-  return <ReactHookForm />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="create" element={<EditForm mode="create" />} />
+        <Route path=":id/edit" element={<EditForm mode="edit" />} />
+        <Route element={<Home />} path="/" />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
