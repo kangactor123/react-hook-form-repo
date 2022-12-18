@@ -13,6 +13,7 @@ function MInputText<T extends FieldValues>({
 }: TProps<T>) {
   const {
     field: { value, onChange },
+    fieldState: { isDirty, isTouched, error },
   } = useController({
     name,
     rules,
@@ -25,6 +26,11 @@ function MInputText<T extends FieldValues>({
       onChange={onChange}
       inputProps={{
         maxLength: 255,
+      }}
+      InputProps={{
+        sx: {
+          border: `1px solid ${error ? "red" : "green"}`, //간단한 에러
+        },
       }}
       {...props}
     />

@@ -1,20 +1,6 @@
+import { TControl } from "common/type";
 import React from "react";
-import {
-  Control,
-  FieldPath,
-  FieldValues,
-  RegisterOptions,
-  useController,
-} from "react-hook-form";
-
-type TControl<T extends FieldValues> = {
-  control: Control<T>;
-  name: FieldPath<T>;
-  rules?: Omit<
-    RegisterOptions<T>,
-    "valueAsNumber" | "valueAsDate" | "setValueAs" | "disabled"
-  >;
-};
+import { FieldValues, useController } from "react-hook-form";
 
 type IInputTextProps<T extends FieldValues> = TControl<T> & {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -28,6 +14,7 @@ function ControlInputText<T extends FieldValues>({
 }: IInputTextProps<T>) {
   const {
     field: { value, onChange: controlChange },
+    fieldState: { isDirty, isTouched, error },
   } = useController({ name, rules, control });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

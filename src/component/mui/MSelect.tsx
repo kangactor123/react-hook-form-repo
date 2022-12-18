@@ -20,7 +20,6 @@ export interface ISelectItem {
 type CustomSelectProps<T> = {
   selectList: ISelectItem[];
   placeholder: string;
-  size?: "small" | "medium" | "large";
   onChange?: (event: SelectChangeEvent<T>) => void;
 };
 
@@ -66,6 +65,11 @@ function MSelect<T extends FieldValues>(props: TProps<T>) {
       renderValue={renderValue}
       onChange={handleChange}
       onBlur={onBlur}
+      sx={{
+        width: "220px",
+        padding: "8px",
+        "& .MuiSelect-outlined": { padding: 0 },
+      }}
     >
       {selectList.map(({ label, value, disabled }, index) => (
         <MenuItem key={index} value={value} disabled={disabled ?? false}>
