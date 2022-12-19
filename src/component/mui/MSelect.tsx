@@ -55,7 +55,7 @@ function MSelect<T extends FieldValues>(props: TProps<T>) {
   };
 
   const renderValue = () =>
-    value
+    value && !!value.length
       ? selectList.find((item) => item.value === value)?.label
       : placeholder;
 

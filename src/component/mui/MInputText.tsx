@@ -29,7 +29,7 @@ function MInputText<T extends FieldValues>({
       }}
       InputProps={{
         sx: {
-          border: `1px solid ${error ? "red" : "green"}`, //간단한 에러
+          border: `1px solid ${error ? "red" : "gray"}`, //간단한 에러
         },
       }}
       {...props}
