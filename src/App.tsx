@@ -7,13 +7,14 @@ import Home from "page/Home";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="create" element={<EditForm mode="create" />} />
-        <Route path=":id/edit" element={<EditForm mode="edit" />} />
-        <Route element={<Home />} path="/" />
-      </Routes>
-    </BrowserRouter>
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="create" element={<EditForm mode="create" />} />
+    //     <Route path=":id/edit" element={<EditForm mode="edit" />} />
+    //     <Route element={<Home />} path="/" />
+    //   </Routes>
+    // </BrowserRouter>
+    <ReactHookForm />
   );
 }
 
