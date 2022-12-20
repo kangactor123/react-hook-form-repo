@@ -15,11 +15,11 @@ export type TControl<T extends FieldValues> = {
 };
 
 export interface TForm {
-  occupation: string;
   id: string;
-  name: string;
   pwd: string;
+  name: string;
   email: string;
   phone: string;
   identity: string;
+  occupation: string;
 }
