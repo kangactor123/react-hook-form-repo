@@ -1,6 +1,7 @@
 import React from "react";
 import EditForm from "page/EditForm";
 import ReactHookForm from "page/ReactHookForm";
+import ResolverForm from "page/ResolverForm";
 import NoHookForm from "./page/NoHookForm";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "page/Home";
@@ -14,7 +15,7 @@ function App() {
     //     <Route element={<Home />} path="/" />
     //   </Routes>
     // </BrowserRouter>
-    <ReactHookForm />
+    <ResolverForm />
   );
 }
 
