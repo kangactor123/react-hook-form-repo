@@ -40,14 +40,19 @@ function ReactHookForm() {
   ];
 
   const handleSubmit = (data: TForm) => {
-    // console.log(data);
+    console.log(data);
   };
 
   return (
     <form onSubmit={onSubmit(handleSubmit)}>
       <Row>
         <Label>Occupation: </Label>&nbsp;
-        <MRadio group={radioGroup} name="occupation" control={control} />
+        <MRadio
+          group={radioGroup}
+          name="occupation"
+          control={control}
+          rules={{ required: "반드시 입력해주세요." }}
+        />
       </Row>
       <Row>
         <Label>name: </Label>
@@ -59,7 +64,7 @@ function ReactHookForm() {
             maxLength: { value: 10, message: "최대 10글자 입력이 가능합니다." },
           }}
         />
-        {errors.name ? <p className="error">{errors.name?.message}</p> : null}
+        {errors?.name ? <p className="error">{errors?.name.message}</p> : null}
       </Row>
       <Row>
         <Label>id: </Label>
@@ -72,16 +77,23 @@ function ReactHookForm() {
             min: { value: 3, message: "3글자 이상 입력해주세요." },
           }}
         />
+        {errors?.id && <p className="error">{errors?.id.message}</p>}
       </Row>
       <Row>
         <Label>pwd: </Label>
-        <ControlInputText<TForm> control={control} name="pwd" />
+        <ControlInputText<TForm>
+          control={control}
+          name="pwd"
+          rules={{ required: "반드시 입력해주세요" }}
+        />
+        {errors?.pwd && <p className="error">{errors?.pwd.message}</p>}
       </Row>
       <Row>
         <Label>email: </Label>
         <input
           type="text"
           {...register("email", {
+            required: "반드시 입력해주세요",
             pattern: {
               value:
                 /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
@@ -90,13 +102,22 @@ function ReactHookForm() {
           })}
         />
         {errors?.email ? (
-          <p className="error">{errors.email?.message}</p>
+          <p className="error">{errors?.email.message}</p>
         ) : null}
       </Row>
       {watch("occupation") === "professor" ? (
         <Row>
           <Label>phone: </Label>
-          <ControlInputText<TForm> control={control} name="phone" />
+          <ControlInputText<TForm>
+            control={control}
+            name="phone"
+            rules={{
+              required:
+                watch("occupation") === "professor"
+                  ? "반드시  입력해주세요"
+                  : false,
+            }}
+          />
         </Row>
       ) : null}
       <Row>
@@ -106,7 +127,11 @@ function ReactHookForm() {
           name="identity"
           selectList={selectList}
           placeholder={"선택해주세요"}
+          rules={{ required: "반드시 입력해주세요." }}
         />
+        {errors?.identity && (
+          <p className="error">{errors?.identity.message}</p>
+        )}
       </Row>
       <button>Submit</button>
     </form>

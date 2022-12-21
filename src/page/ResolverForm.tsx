@@ -67,7 +67,7 @@ function ResolverForm() {
   });
 
   const handleSubmit = (data: TForm) => {
-    // console.log(data);
+    console.log(data);
   };
 
   return (
