@@ -5,31 +5,6 @@ import MRadio, { TRadioGroup } from "component/mui/MRadio";
 import MSelect, { ISelectItem } from "component/mui/MSelect";
 import { useForm } from "react-hook-form";
 import { Row, Label } from "style";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-const schema = yup.object().shape({
-  name: yup
-    .string()
-    .required("반드시 입력해주세요.")
-    .max(10, "최대 10글자까지 입력 가능합니다."),
-  id: yup
-    .string()
-    .required("반드시 입력해주세요.")
-    .min(1, "한 글자 이상 입력해주세요")
-    .max(10, "최대 10글자 입력 가능합니다"),
-  pwd: yup.string().required("반드시 입력해주세요."),
-  email: yup
-    .string()
-    .required("반드시 입력해주세요.")
-    .matches(
-      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/,
-      "이메일 형식에 맞지 않습니다."
-    ),
-  phone: yup.string().required("반드시 입력해주세요."),
-  identity: yup.string().required("반드시 입력해주세요."),
-  occupation: yup.string().required("반드시 입력해주세요."),
-});
 
 function ReactHookForm() {
   const {
@@ -49,7 +24,6 @@ function ReactHookForm() {
       phone: "",
       identity: "child",
     },
-    resolver: yupResolver(schema),
   });
 
   const selectList: ISelectItem[] = [
@@ -77,12 +51,27 @@ function ReactHookForm() {
       </Row>
       <Row>
         <Label>name: </Label>
-        <MInputText<TForm> control={control} name="name" />
+        <MInputText<TForm>
+          control={control}
+          name="name"
+          rules={{
+            required: "반드시 입력해주세요",
+            maxLength: { value: 10, message: "최대 10글자 입력이 가능합니다." },
+          }}
+        />
         {errors.name ? <p className="error">{errors.name?.message}</p> : null}
       </Row>
       <Row>
         <Label>id: </Label>
-        <ControlInputText<TForm> control={control} name="id" />
+        <ControlInputText<TForm>
+          control={control}
+          name="id"
+          rules={{
+            required: "반드시 입력해주세요",
+            max: { value: 10, message: "최대 10글자 입력이 가능합니다." },
+            min: { value: 3, message: "3글자 이상 입력해주세요." },
+          }}
+        />
       </Row>
       <Row>
         <Label>pwd: </Label>
@@ -90,7 +79,16 @@ function ReactHookForm() {
       </Row>
       <Row>
         <Label>email: </Label>
-        <input type="text" {...register("email")} />
+        <input
+          type="text"
+          {...register("email", {
+            pattern: {
+              value:
+                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+              message: "이메일 형식에 맞지 않습니다.",
+            },
+          })}
+        />
         {errors?.email ? (
           <p className="error">{errors.email?.message}</p>
         ) : null}
