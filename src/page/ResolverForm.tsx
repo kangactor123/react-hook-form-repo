@@ -1,5 +1,4 @@
 import { TForm } from "common/type";
-import ControlInputText from "component/ControlInputText";
 import MInputText from "component/mui/MInputText";
 import MRadio, { TRadioGroup } from "component/mui/MRadio";
 import MSelect, { ISelectItem } from "component/mui/MSelect";
@@ -49,7 +48,6 @@ const radioGroup: TRadioGroup[] = [
 
 function ResolverForm() {
   const {
-    register,
     control,
     handleSubmit: onSubmit,
     watch,
@@ -69,10 +67,8 @@ function ResolverForm() {
   });
 
   const handleSubmit = (data: TForm) => {
-    // console.log(data);
+    console.log(data);
   };
-
-  console.log(errors);
 
   return (
     <form onSubmit={onSubmit(handleSubmit)}>
@@ -83,32 +79,28 @@ function ResolverForm() {
       <Row>
         <Label>name: </Label>
         <MInputText<TForm> control={control} name="name" />
-        {errors.name ? <p className="error">{errors.name?.message}</p> : null}
+        {errors?.name && <p className="error">{errors.name?.message}</p>}
       </Row>
       <Row>
         <Label>id: </Label>
-        <ControlInputText<TForm> control={control} name="id" />
-        {errors?.id ? <p className="error">{errors.id?.message}</p> : null}
+        <MInputText<TForm> control={control} name="id" />
+        {errors?.id && <p className="error">{errors.id?.message}</p>}
       </Row>
       <Row>
         <Label>pwd: </Label>
-        <ControlInputText<TForm> control={control} name="pwd" />
-        {errors?.pwd ? <p className="error">{errors.pwd?.message}</p> : null}
+        <MInputText<TForm> control={control} name="pwd" />
+        {errors?.pwd && <p className="error">{errors.pwd?.message}</p>}
       </Row>
       <Row>
         <Label>email: </Label>
-        <input type="text" {...register("email")} />
-        {errors?.email ? (
-          <p className="error">{errors.email?.message}</p>
-        ) : null}
+        <MInputText<TForm> control={control} name="email" />
+        {errors?.email && <p className="error">{errors.email?.message}</p>}
       </Row>
       {watch("occupation") === "professor" ? (
         <Row>
           <Label>phone: </Label>
-          <ControlInputText<TForm> control={control} name="phone" />
-          {errors?.phone ? (
-            <p className="error">{errors.phone?.message}</p>
-          ) : null}
+          <MInputText<TForm> control={control} name="phone" />
+          {errors?.phone && <p className="error">{errors.phone?.message}</p>}
         </Row>
       ) : null}
       <Row>
@@ -119,9 +111,7 @@ function ResolverForm() {
           selectList={selectList}
           placeholder={"선택해주세요"}
         />
-        {errors?.identity ? (
-          <p className="error">{errors.email?.message}</p>
-        ) : null}
+        {errors?.identity && <p className="error">{errors.email?.message}</p>}
       </Row>
       <button>Submit</button>
     </form>
