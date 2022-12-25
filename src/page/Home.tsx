@@ -15,7 +15,7 @@ function Home() {
     navigate("create");
   };
   const handleEdit = () => {
-    navigate("kang1/edit");
+    navigate("thomas/edit");
   };
   useQuery(["list"], getList);
   return (

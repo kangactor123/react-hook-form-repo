@@ -22,4 +22,6 @@ export interface TForm {
   phone: string;
   identity: string;
   occupation: string;
+  score?: string;
+  level?: string;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { TForm } from "common/type";
 import MInputText from "component/mui/MInputText";
@@ -22,6 +22,8 @@ const defaultValues = {
   email: "",
   occupation: "",
   identity: "",
+  score: "",
+  level: "",
 };
 
 const selectList: ISelectItem[] = [
@@ -37,17 +39,32 @@ const radioGroup: TRadioGroup[] = [
   { label: "student", value: "student" },
 ];
 
+const scoreGroup: TRadioGroup[] = [
+  { label: "grand", value: "grand" },
+  { label: "minor", value: "minor" },
+];
+
+const levelGroup: TRadioGroup[] = [
+  { label: "first", value: "first" },
+  { label: "second", value: "second" },
+  { label: "third", value: "third" },
+];
+
 function EditForm({ mode }: EditProps) {
   const { id } = useParams();
   const navigate = useNavigate();
   const {
     control,
     handleSubmit: onSubmit,
+    setValue,
     reset,
     watch,
   } = useForm<TForm>({
     defaultValues,
+    mode: "all",
   });
+
+  const { occupation } = watch();
 
   const handleBack = () => {
     navigate("/");
@@ -71,10 +88,25 @@ function EditForm({ mode }: EditProps) {
       reset({
         ...watch(),
         occupation: "professor",
-        identity: "mother",
+        identity: "child",
+        score: "grand",
+        level: "first",
       });
     }
   }, []);
+
+  useLayoutEffect(() => {
+    switch (occupation) {
+      case "professor": {
+        setValue("score", "grand");
+        break;
+      }
+      case "student": {
+        setValue("score", "minor");
+        break;
+      }
+    }
+  }, [occupation, setValue]);
 
   return (
     <form onSubmit={onSubmit(handleSubmit)}>
@@ -82,6 +114,16 @@ function EditForm({ mode }: EditProps) {
         <Label>Occupation</Label>
         <MRadio<TForm> group={radioGroup} control={control} name="occupation" />
       </Row>
+      <Row>
+        <Label>Score</Label>
+        <MRadio<TForm> group={scoreGroup} control={control} name="score" />
+      </Row>
+      {occupation === "student" ? (
+        <Row>
+          <Label>Level</Label>
+          <MRadio<TForm> group={levelGroup} control={control} name="level" />
+        </Row>
+      ) : null}
       <Row>
         <Label>Id</Label>
         <MInputText<TForm> control={control} name="id" />
