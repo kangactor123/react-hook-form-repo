@@ -20,10 +20,10 @@ const defaultValues = {
   name: "",
   phone: "",
   email: "",
-  occupation: "",
-  identity: "",
-  score: "",
-  level: "",
+  occupation: "professor",
+  identity: "child",
+  score: "major",
+  level: "first",
 };
 
 const selectList: ISelectItem[] = [
@@ -40,7 +40,7 @@ const radioGroup: TRadioGroup[] = [
 ];
 
 const scoreGroup: TRadioGroup[] = [
-  { label: "grand", value: "grand" },
+  { label: "major", value: "major" },
   { label: "minor", value: "minor" },
 ];
 
@@ -74,6 +74,21 @@ function EditForm({ mode }: EditProps) {
     console.log(data);
   };
 
+  /** 기존 useQuery 를 통해 데이터를 폼에 주입했던 방식
+  const { data } = useQuery(["list"], getList, {
+    enabled: !!id,
+    refetchOnMount: "always",
+  });
+
+  useEffect(() => {
+    if (mode === "edit" && data) {
+      reset({
+        ...data,
+      });
+    }
+  }, []);
+  */
+
   useQuery(["list"], getList, {
     enabled: !!id,
     refetchOnMount: "always",
@@ -88,7 +103,7 @@ function EditForm({ mode }: EditProps) {
       reset({
         ...watch(),
         occupation: "professor",
-        identity: "child",
+        identity: "father",
         score: "grand",
         level: "first",
       });
