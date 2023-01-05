@@ -22,12 +22,12 @@ react-hook-form 예제 Repo 입니다.
 
 - 첫 번째 포스팅 관련된 코드는 src/page/NoHookForm.tsx, ReactHookForm.tsx 에서 확인 가능합니다.
 - src/component/InputText.tsx, ControlInputText.tsx 두 컴포넌트는 해당 포스팅에서 다뤘던 컴포넌트 입니다.
-- 글 확인하기 >
+- <a href="https://tech.osci.kr/2023/01/02/introduce-react-hook-form/">글 확인하기 ></a>
 
 # Second Posting
 
 - 두 번째 포스팅 관련 컴포넌트(MUI Component)는 src/component/mui 에서 확인 가능합니다.
-- 글 확인하기 >
+- <a href="https://tech.osci.kr/2023/01/05/react-hook-form-with-mui/">글 확인하기 ></a>
 
 # Third Posting
 
