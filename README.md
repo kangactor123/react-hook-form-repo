@@ -33,4 +33,4 @@ react-hook-form 예제 Repo 입니다.
 
 - 세 번째 포스팅 관련 페이지는 src/page/EditForm.tsx 에서 확인 가능합니다.
 - yarn start 를 한다면 edit 모드를 바로 확인하실 수 있습니다.
-- 글 확인하기 >
+- <a href="https://tech.osci.kr/2023/01/09/react-hook-form-series-3/" target="_blank">글 확인하기 ></a>
