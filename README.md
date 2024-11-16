@@ -1,6 +1,6 @@
 # react-hook-form Repo
 
-react-hook-form 예제 Repo 입니다.
+react-hook-form 예제 레포지토리 입니다.
 
 # 설치된 Library
 
